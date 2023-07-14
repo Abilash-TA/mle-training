@@ -136,7 +136,6 @@ param_distribs = {
     "max_features": randint(low=1, high=8),
 }
 
-
 forest_reg = RandomForestRegressor(random_state=42)
 rnd_search = RandomizedSearchCV(
     forest_reg,
