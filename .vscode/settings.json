@@ -1,0 +1,16 @@
+{
+    "python.formatting.provider": "black",
+    "isort.check": true,
+    "python.sortImports.path": "isort",
+    "python.linting.flake8Enabled": true,
+    "files.trimTrailingWhitespace": true,
+    "editor.tabSize": 4,
+    "[python]": {
+        "editor.defaultFormatter": "ms-python.black-formatter"
+    },
+    "editor.trimAutoWhitespace": true,
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+        "source.organizeImports": true
+    }
+}
