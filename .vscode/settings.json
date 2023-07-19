@@ -1,5 +1,5 @@
 {
-    "python.formatting.provider": "none",
+    "python.formatting.provider": "black",
     "isort.check": true,
     "python.linting.flake8Enabled": true,
     "files.trimTrailingWhitespace": true,
