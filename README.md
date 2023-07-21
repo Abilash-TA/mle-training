@@ -1,8 +1,8 @@
 # Median housing value prediction
 
-The housing data can be downloaded from https://raw.githubusercontent.com/ageron/handson-ml/master/. The script has codes to download the data. We have modelled the median house value on given housing data. 
+The housing data can be downloaded from https://raw.githubusercontent.com/ageron/handson-ml/master/. The script has codes to download the data. We have modelled the median house value on given housing data.
 
-The following techniques have been used: 
+The following techniques have been used:
 
  - Linear regression
  - Decision Tree
@@ -14,7 +14,7 @@ The following techniques have been used:
  - Multiple sampling techinuqies are evaluated. The data set is split into train and test.
  - All the above said modelling techniques are tried and evaluated. The final metric used to evaluate is mean squared error.
 
-## To excute the script
+## To create and activate the environment
  - Create a virtual environment and activate it:
    - If you don't have the mle-dev environment set up, you can create it using the provided env.yml file.
    Run the following command to create the environment from the env.yml file:
@@ -22,9 +22,28 @@ The following techniques have been used:
  - Activate the environment:
    - Once the environment is created, activate it using the following command
    - *conda activate mle-dev*
- - With the virtual environment activated, you can run the script using the following command:
-   - python nonstandardcode.py
 
 
-      
+## To install the housinglib library
+First, download the wheel file from the repo, then run the following command.
+```
+pip install housinglib-0.1.0-py3-none-any.whl
+```
+Import the housinglib library by using
+```
+import housinglib
+```
 
+## The scripts folder contains the scripts to download data, train and check scores of the model
+To load the data and create training and testing set, use the ingest_data.py script by running following command in the shell:
+```
+python ingest_data.py
+```
+To train the model using the training data, use train.py
+```
+python train.py
+```
+To see the performance of the model, use score.py
+```
+python score.py
+```
