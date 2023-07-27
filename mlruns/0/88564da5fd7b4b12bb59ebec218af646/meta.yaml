@@ -1,0 +1,15 @@
+artifact_uri: file:///home/abilash/Main/mle-training/mlruns/0/88564da5fd7b4b12bb59ebec218af646/artifacts
+end_time: 1690477816713
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 88564da5fd7b4b12bb59ebec218af646
+run_name: likeable-zebra-770
+run_uuid: 88564da5fd7b4b12bb59ebec218af646
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1690477815872
+status: 3
+tags: []
+user_id: abilash

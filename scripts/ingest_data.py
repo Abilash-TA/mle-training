@@ -4,54 +4,13 @@ import logging.config
 import os
 import os.path as op
 import sys
+import warnings
+
+import mlflow
+import mlflow.sklearn
+import numpy as np
 
 import housinglib as hlb
-
-HERE1 = op.dirname(op.abspath(__file__))
-lib_path = op.join(HERE1, "..")
-sys.path.append(lib_path)
-
-parser = argparse.ArgumentParser(description="data folder path")
-parser.add_argument("--path", nargs="?")
-parser.add_argument("--log_level", nargs="?")
-parser.add_argument("--log_path", nargs="?")
-parser.add_argument("--no_console_log", nargs="?")
-args = parser.parse_args()
-
-if args.path is None:
-    HERE = op.dirname(op.abspath(__file__))
-    HOUSING_PATH = op.join(HERE, "..", "data", "raw")
-else:
-    HOUSING_PATH = args.path
-if args.log_level is None:
-    log_level = "DEBUG"
-else:
-    log_level = args.log_level
-
-if args.log_path is None:
-    log_file = None
-else:
-    log_file = os.path.join(
-        os.path.dirname(os.path.abspath(__file__)), "..", "logs", "ingest_data.log"
-    )
-
-if args.no_console_log is None:
-    no_console_log = True
-else:
-    no_console_log = False
-LOGGING_DEFAULT_CONFIG = {
-    "version": 1,
-    "disable_existing_loggers": False,
-    "formatters": {
-        "default": {
-            "format": "%(asctime)s - %(name)s - %(levelname)s \
-                - %(funcName)s:%(lineno)d - %(message)s",
-            "datefmt": "%Y-%m-%d %H:%M:%S",
-        },
-        "simple": {"format": "%(message)s"},
-    },
-    "root": {"level": "DEBUG"},
-}
 
 
 def configure_logger(
@@ -81,13 +40,70 @@ def configure_logger(
     return logger
 
 
-logger = configure_logger(
-    log_file=log_file, console=no_console_log, log_level=log_level
-)
+def mlflow_data_ingest(HOUSING_PATH, project_path):
+    hlb.load_data(HOUSING_PATH)
 
-hlb.load_data(HOUSING_PATH)
+    hlb.data_prep(HOUSING_PATH, project_path=project_path)
 
 
-hlb.data_prep(HOUSING_PATH, project_path=HERE)
+if __name__ == "__main__":
+    warnings.filterwarnings("ignore")
+    np.random.seed(40)
 
-# logs added
+    HERE1 = op.dirname(op.abspath(__file__))
+    lib_path = op.join(HERE1, "..")
+    sys.path.append(lib_path)
+
+    parser = argparse.ArgumentParser(description="data folder path")
+    parser.add_argument("--input_path", nargs="?")
+    parser.add_argument("--log_level", nargs="?")
+    parser.add_argument("--log_path", nargs="?")
+    parser.add_argument("--no_console_log", nargs="?")
+    args = parser.parse_args()
+
+    HERE = op.dirname(op.abspath(__file__))
+
+    if args.input_path is None:
+        HOUSING_PATH = op.join(HERE, "..", "data", "raw")
+    else:
+        HOUSING_PATH = args.input_path
+
+    if args.log_level is None:
+        log_level = "DEBUG"
+    else:
+        log_level = args.log_level
+
+    if args.log_path is None:
+        log_file = None
+    else:
+        log_file = os.path.join(
+            os.path.dirname(os.path.abspath(__file__)),
+            "..",
+            "logs",
+            "ingest_data.log",
+        )
+
+    if args.no_console_log is None:
+        no_console_log = True
+    else:
+        no_console_log = False
+
+    LOGGING_DEFAULT_CONFIG = {
+        "version": 1,
+        "disable_existing_loggers": False,
+        "formatters": {
+            "default": {
+                "format": "%(asctime)s - %(name)s - %(levelname)s \
+                    - %(funcName)s:%(lineno)d - %(message)s",
+                "datefmt": "%Y-%m-%d %H:%M:%S",
+            },
+            "simple": {"format": "%(message)s"},
+        },
+        "root": {"level": "DEBUG"},
+    }
+
+    logger = configure_logger(
+        log_file=log_file, console=no_console_log, log_level=log_level
+    )
+    with mlflow.start_run(nested=True):
+        mlflow_data_ingest(HOUSING_PATH, HERE)

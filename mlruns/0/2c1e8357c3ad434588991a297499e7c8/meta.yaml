@@ -1,0 +1,15 @@
+artifact_uri: file:///home/abilash/Main/mle-training/mlruns/0/2c1e8357c3ad434588991a297499e7c8/artifacts
+end_time: 1690478010564
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 2c1e8357c3ad434588991a297499e7c8
+run_name: unique-pug-141
+run_uuid: 2c1e8357c3ad434588991a297499e7c8
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1690478010476
+status: 3
+tags: []
+user_id: abilash
