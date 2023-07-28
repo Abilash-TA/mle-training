@@ -1,0 +1,7 @@
+name: houseprice
+conda_env:
+   deploy/conda/env.yml
+
+entry_points:
+  main:
+    command: "python scripts/houseprice.py"
