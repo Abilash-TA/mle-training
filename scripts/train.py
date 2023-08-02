@@ -42,9 +42,7 @@ def configure_logger(
 
 
 def mlflow_train(project_path, logger, path):
-    housing_prepared, housing_labels = hlb.load_train_data(
-        project_path=project_path
-    )
+    housing_prepared, housing_labels = hlb.load_train_data(project_path=project_path)
     logger.info("Splitting training data into X_train and y_train")
 
     # hlb.lin_reg(housing_prepared, housing_labels)
